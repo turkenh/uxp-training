@@ -10,6 +10,6 @@ spec:
   compositionSelector:
     matchLabels:
       uxp-guide: getting-started
-      provider: aws
+      provider: azure
   writeConnectionSecretToRef:
     name: db-conn
