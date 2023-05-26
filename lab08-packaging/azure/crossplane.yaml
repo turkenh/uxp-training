@@ -1,0 +1,13 @@
+apiVersion: meta.pkg.crossplane.io/v1
+kind: Configuration
+metadata:
+  name: getting-started-with-azure
+  annotations:
+    uxp-guide: getting-started
+    provider: azure
+spec:
+  crossplane:
+    version: ">=v1.12.1"
+  dependsOn:
+    - provider: xpkg.upbound.io/upbound/provider-azure
+      version: "v0.32.0"
