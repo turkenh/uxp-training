@@ -2,17 +2,17 @@ apiVersion: apiextensions.crossplane.io/v1
 kind: Composition
 metadata:
 
-  name: example
+  name: xnetworks.azure.platformref.upbound.io
 
   labels:
     # An optional convention is to include a label of the XRD. This allows
     # easy discovery of compatible Compositions.
 
-    crossplane.io/xrd: xpostgresqlinstances.database.example.org
+    crossplane.io/xrd: xnetworks.azure.platformref.upbound.io
 
     # The following label marks this Composition for GCP. This label can
     # be used in 'compositionSelector' in an XR or Claim.
-    provider: gcp
+    provider: azure
 
     # Other labels can be added to match.
 spec:
@@ -22,9 +22,9 @@ spec:
   # version must be marked 'referenceable' in the XRD that defines the XR.
 
   # Multiple Compositions can refer to the same Composite Resource.
- compositeTypeRef:
-    apiVersion: database.example.org/v1alpha1
-    kind: XPostgreSQLInstance
+  compositeTypeRef:
+     apiVersion: azure.platformref.upbound.io/v1alpha1
+     kind: XNetwork
 
   # When an XR is created in response to a claim Crossplane needs to know where
   # it should create the XR's connection secret. This is configured using the
@@ -43,5 +43,5 @@ spec:
   # The next section is a list of resources that is part of the composition.
   # We'll be filling these in during the next labs.
 
-  resources:
-  - name: toBeDefined
+  #resources:
+  #- name: toBeDefined
