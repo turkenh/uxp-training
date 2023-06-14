@@ -23,3 +23,11 @@ spec:
                   description: ID of this Network that other objects will use to refer to it.
               required:
                 - id
+# Define custom status below
+#           status:
+            # type: object
+            # properties:
+            #   subnetId:
+            #     type: #fillmein
+            #   subnetCIDR:
+            #      type: #fillemin

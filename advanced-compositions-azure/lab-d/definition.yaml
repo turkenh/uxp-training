@@ -67,3 +67,9 @@ spec:
             required:
             - id
             - parameters
+# Define custom status below
+          status:
+            type: object
+            properties:
+              #fillmein:
+-                type: #fillme in

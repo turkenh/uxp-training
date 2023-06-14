@@ -23,6 +23,10 @@ spec:
                 vmSize: Standard_B2s #patched
             identity:
               - type: "SystemAssigned"
+# Extend base spec below
+#           apiServerAccessProfile:
+#            - authorizedIpRanges:
+#                - 0.0.0.0/0
       patches:
         - fromFieldPath: spec.id
           toFieldPath: metadata.name
@@ -54,6 +58,9 @@ spec:
             - type: string
               string:
                 fmt: "%s-aks"
+         # Propagate new API field value with the patch below
+#        - fromFieldPath: spec.parameters.authorizedIpRange
+#          toFieldPath: spec.forProvider.apiServerAccessProfile[0].authorizedIpRanges[0]
       connectionDetails:
         - fromConnectionSecretKey: kubeconfig
     - name: provider-config-helm

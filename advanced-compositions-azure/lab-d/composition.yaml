@@ -30,6 +30,13 @@ spec:
           toFieldPath: spec.parameters.nodes.count
         - fromFieldPath: spec.parameters.nodes.size
           toFieldPath: spec.parameters.nodes.size
+        # Patch from custom Status down to nested XAKS XR
+        # Notice romFieldPath: Required that prevents the XR creation until
+        # fromFieldPath field has the non-empty value
+#       - fromFieldPath: status.authorizedIpRange
+#         toFieldPath: spec.parameters.authorizedIpRange
+#         policy:
+#           fromFieldPath: Required
     - base:
         apiVersion: # Fill in the custom platform API Group
         kind: # Fill in the XServices kind

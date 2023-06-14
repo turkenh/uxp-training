@@ -27,6 +27,9 @@ spec:
                 type: object
                 description: AKS configuration parameters.
                 properties:
+                  # Define new API field below
+                  # authorizedIpRange:
+                  #   type: string
                   nodes:
                     type: object
                     description: AKS node configuration parameters.
