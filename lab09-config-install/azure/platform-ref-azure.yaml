@@ -3,4 +3,4 @@ kind: Configuration
 metadata:
   name: platform-ref-azure
 spec:
-  package: xpkg.upbound.io/upbound/platform-ref-azure:v0.5.0
+  package: xpkg.upbound.io/upbound/platform-ref-azure:v0.7.0
