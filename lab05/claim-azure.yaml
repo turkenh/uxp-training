@@ -1,7 +1,7 @@
 apiVersion: database.example.org/v1alpha1
 kind: PostgreSQLInstance
 metadata:
-  name: my-db
+  name: my-db-azure
   namespace: default
 spec:
   parameters:
@@ -10,6 +10,6 @@ spec:
   compositionSelector:
     matchLabels:
       uxp-guide: getting-started
-      provider: aws
+      provider: azure
   writeConnectionSecretToRef:
-    name: db-conn
+    name: db-conn-azure

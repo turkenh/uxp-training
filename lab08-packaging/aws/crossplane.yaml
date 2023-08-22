@@ -1,0 +1,14 @@
+apiVersion: meta.pkg.crossplane.io/v1
+kind: Configuration
+metadata:
+  name: getting-started-with-aws
+  annotations:
+    uxp-guide: getting-started
+spec:
+  crossplane:
+    version: ">=v1.12.2"
+  dependsOn:
+    - provider: xpkg.upbound.io/upbound/provider-aws-ec2
+      version: ">=v0.38.0"
+    - provider: xpkg.upbound.io/upbound/provider-aws-rds
+      version: ">=v0.38.0"

@@ -1,0 +1,17 @@
+apiVersion: meta.pkg.crossplane.io/v1
+kind: Configuration
+metadata:
+  name: getting-started-with-azure
+  annotations:
+    uxp-guide: getting-started
+    provider: azure
+spec:
+  crossplane:
+    version: ">=v1.12.2"
+  dependsOn:
+    - provider: xpkg.upbound.io/upbound/provider-family-azure
+      version: "v0.34.0"
+    - provider: xpkg.upbound.io/upbound/provider-azure-network
+      version: "v0.34.0"
+    - provider: xpkg.upbound.io/upbound/provider-azure-dbforpostgresql
+      version: "v0.34.0"

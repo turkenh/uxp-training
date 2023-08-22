@@ -2,17 +2,17 @@ apiVersion: apiextensions.crossplane.io/v1
 kind: CompositeResourceDefinition
 metadata:
   # XRDs must be named '<plural>.<group>', per the plural and group names below.
-  name: xpostgresqlinstances.example.org
+  name: xnetworks.azure.platformref.upbound.io
 spec:
 
-  # This XRD defines an XR in the 'example.org' API group.
+  # This XRD defines an XR in the 'azure.platformref.upbound.io' API group.
 
-  group: example.org
-  # The kind of this XR will be 'XPostgreSQLInstance`. You may also optionally
+  group: azure.platformref.upbound.io
+  # The kind of this XR will be 'XNetwork`. You may also optionally
   # specify a singular name and a listKind.
   names:
-    kind: XPostgreSQLInstance
-    plural: xpostgresqlinstances
+    kind: XNetwork
+    plural: xnetworks
 
   # This type of XR offers a claim. Omit claimNames if you don't want to do so.
   # The claimNames must be different from the names above - a common convention
@@ -21,8 +21,8 @@ spec:
   # PostgreSQLInstance'.
 
   claimNames:
-    kind: PostgreSQLInstance
-    plural: postgresqlinstances
+    kind: Network
+    plural: networks
 
   # Each type of XR can declare any keys they write to their connection secret
   # which will act as a filter during aggregation of the connection secret from
@@ -43,7 +43,7 @@ spec:
   # enforceCompositionRef field also exists to allow XRs to enforce a specific
   # Composition that should always be used.
   defaultCompositionRef:
-    name: example
+    name: xnetworks.azure.platformref.upbound.io
 
   # Each type of XR may be served at different versions - e.g. v1alpha1, v1beta1
   # and v1 - simultaneously. Currently Crossplane requires that all versions
@@ -69,18 +69,13 @@ spec:
           spec:
             type: object
             properties:
-              parameters:
-                type: object
-                properties:
-                  storageGB:
-                    type: integer
-                required:
-                - storageGB
+              id:
+                type: string
+                description: ID of this Network that other objects will use to refer to it.
             required:
-            - parameters
+              - id
           status:
             type: object
             properties:
-              address:
-                description: Address of this PostgreSQL server.
+              subnetId:
                 type: string
