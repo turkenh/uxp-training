@@ -178,7 +178,7 @@ spec:
             instanceClass: db.t2.small
             username: masteruser
             engine: postgres
-            engineVersion: "12.10"
+            engineVersion: "12.15"
             skipFinalSnapshot: true
             publiclyAccessible: true
             passwordSecretRef:
