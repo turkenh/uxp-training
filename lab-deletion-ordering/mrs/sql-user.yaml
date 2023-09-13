@@ -1,0 +1,14 @@
+apiVersion: mysql.sql.crossplane.io/v1alpha1
+kind: User
+metadata:
+  name: example-user
+spec:
+  writeConnectionSecretToRef:
+    name: example-user-connection
+    namespace: default # patch claim namespace here
+  forProvider:
+    resourceOptions:
+      maxQueriesPerHour: 1000
+      maxUpdatesPerHour: 1000
+      maxConnectionsPerHour: 100
+      maxUserConnections: 10

@@ -1,0 +1,22 @@
+apiVersion: mysql.sql.crossplane.io/v1alpha1
+kind: ProviderConfig
+metadata:
+  name: default
+spec:
+  credentials:
+    source: MySQLConnectionSecret
+    connectionSecretRef:
+      namespace: database-system
+      name: database-connection
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: database-connection
+  namespace: database-system
+data:
+  username: cm9vdA== # root
+  password: Q3Q5UXR6QlRXZw== # randomly generated
+  endpoint: bWFyaWFkYi5kYXRhYmFzZS1zeXN0ZW0uc3ZjLmNsdXN0ZXIubG9jYWw= # mariadb.database-system.svc.cluster.local
+  port: MzMwNg== # "3306"
+
