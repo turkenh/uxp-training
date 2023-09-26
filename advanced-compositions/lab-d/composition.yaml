@@ -15,8 +15,8 @@ spec:
         - fromFieldPath: spec.id
           toFieldPath: spec.id
         - type: ToCompositeFieldPath
-          fromFieldPath: # Fill in with XNetwork status path
-          toFieldPath: # Fill in with XCluster status path
+          fromFieldPath: # Fill in with XNetwork status path for subnetIds
+          toFieldPath: # Fill in with XCluster status path to keep subnetIds
           policy:
             fromFieldPath: Required
         - type: ToCompositeFieldPath
