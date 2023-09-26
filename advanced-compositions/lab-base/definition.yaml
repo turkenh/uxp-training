@@ -2,27 +2,27 @@ apiVersion: apiextensions.crossplane.io/v1
 kind: CompositeResourceDefinition
 metadata:
   # XRDs must be named '<plural>.<group>', per the plural and group names below.
-  name: xpostgresqlinstances.example.org
+  name: xnetworks.aws.platformref.upbound.io
 spec:
 
-  # This XRD defines an XR in the 'example.org' API group.
+  # This XRD defines an XR in the 'aws.platformref.upbound.io' API group.
 
-  group: example.org
-  # The kind of this XR will be 'XPostgreSQLInstance`. You may also optionally
+  group: aws.platformref.upbound.io
+  # The kind of this XR will be 'XNetwork`. You may also optionally
   # specify a singular name and a listKind.
   names:
-    kind: XPostgreSQLInstance
-    plural: xpostgresqlinstances
+    kind: XNetwork
+    plural: xnetworks
 
   # This type of XR offers a claim. Omit claimNames if you don't want to do so.
   # The claimNames must be different from the names above - a common convention
   # is that names are prefixed with 'X' while claim names are not. This lets app
   # team members think of creating a claim as (e.g.) 'creating a
-  # PostgreSQLInstance'.
+  # Network'.
 
   claimNames:
-    kind: PostgreSQLInstance
-    plural: postgresqlinstances
+    kind: Network
+    plural: networks
 
   # Each type of XR can declare any keys they write to their connection secret
   # which will act as a filter during aggregation of the connection secret from
@@ -63,24 +63,22 @@ spec:
     # determines what fields your XR and claim will have. Note that Crossplane
     # will automatically extend with some additional Crossplane machinery.
     schema:
-      openAPIV3Schema:
-        type: object
-        properties:
-          spec:
-            type: object
-            properties:
-              parameters:
-                type: object
-                properties:
-                  storageGB:
-                    type: integer
-                required:
-                - storageGB
-            required:
-            - parameters
-          status:
-            type: object
-            properties:
-              address:
-                description: Address of this PostgreSQL server.
-                type: string
+        openAPIV3Schema:
+          type: object
+          properties:
+            spec:
+              type: object
+              properties:
+                id:
+                  type: string
+                  description: ID of this Network that other objects will use to refer to it.
+              required:
+                - id
+            status:
+              type: object
+              properties:
+                securityGroupIds:
+                  description: custom status field of array type
+                  type: array
+                  items:
+                    type: string

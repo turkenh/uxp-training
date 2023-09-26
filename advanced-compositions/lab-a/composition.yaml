@@ -9,7 +9,7 @@ spec:
   compositeTypeRef:
     apiVersion: aws.platformref.upbound.io/v1alpha1
     kind: XNetwork
- 
+
    # patchSets contain patches that can be shared among managed resources
   patchSets:
   - name: network-id
@@ -23,19 +23,19 @@ spec:
     # Every resource in a composition should have three items defined:
     #    - base: contains the Managed Resource
     #      name: name of the resource to identity it. Recommended
-    #      patches: patches to apply to the managed resource. 
+    #      patches: patches to apply to the managed resource.
     - base:
         apiVersion: ec2.aws.upbound.io/v1beta1
         kind: VPC
         spec:
           forProvider:
-            region: us-west-2
+            region: eu-west-1
             cidrBlock: 192.168.0.0/16
-# Add missing fields to configure DNS for this VPC   
+# Add missing fields to configure DNS for this VPC
             tags:
               Owner: Platform Team
               Name: platformref-vpc
       name: platformref-vpc
-      patches: 
+      patches:
         - type: PatchSet
           patchSetName: network-id
