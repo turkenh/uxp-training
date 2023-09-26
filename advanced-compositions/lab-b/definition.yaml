@@ -26,10 +26,6 @@ spec:
             status:
               type: object
               properties:
-                subnetIds:
-                  type: array
-                  items:
-                    type: string
                 securityGroupIds:
                   type: array
                   items:

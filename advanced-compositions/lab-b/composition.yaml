@@ -39,8 +39,8 @@ spec:
           forProvider:
             region: eu-west-1
             #
-            # The InternetGateway requires a VPC. 
-            # How do we refer to the VPC defined above? 
+            # The InternetGateway requires a VPC.
+            # How do we refer to the VPC defined above?
       name: gateway
       patches:
         - type: PatchSet
