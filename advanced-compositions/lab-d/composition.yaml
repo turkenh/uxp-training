@@ -10,13 +10,13 @@ spec:
   resources:
     - base:
         apiVersion: # Fill in the custom platform API Group
-        kind: # Fill in the Xnetwork kind
+        kind: # Fill in the XNetwork kind
       patches:
         - fromFieldPath: spec.id
           toFieldPath: spec.id
         - type: ToCompositeFieldPath
-          fromFieldPath: status.subnetIds
-          toFieldPath: status.subnetIds
+          fromFieldPath: # Fill in with XNetwork status path for subnetIds
+          toFieldPath: # Fill in with XCluster status path to keep subnetIds
           policy:
             fromFieldPath: Required
         - type: ToCompositeFieldPath
@@ -48,8 +48,8 @@ spec:
           toFieldPath: spec.parameters.nodes.count
         - fromFieldPath: spec.parameters.nodes.size
           toFieldPath: spec.parameters.nodes.size
-        - fromFieldPath: status.subnetIds
-          toFieldPath: spec.parameters.subnetIds
+        - fromFieldPath: # Fill in the XCluster status path that keeps the subnetIds
+          toFieldPath: # Fill in the XEKS spec for subnetIds
           policy:
             fromFieldPath: Required
         - fromFieldPath: status.securityGroupIds
