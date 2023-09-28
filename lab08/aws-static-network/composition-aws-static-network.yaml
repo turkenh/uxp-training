@@ -105,34 +105,34 @@ spec:
           fromConnectionSecretKey: attribute.password
         - name: endpoint
           fromFieldPath: status.atProvider.endpoint
-    # - name: iampolicy
-    #   base:
-    #     apiVersion: iam.aws.upbound.io/v1beta1
-    #     kind: Policy
-    #   patches:
-    #     - fromFieldPath: metadata.name
-    #       toFieldPath: spec.forProvider.name
-    #       transforms:
-    #         - type: string
-    #           string:
-    #             fmt: "%s-postgresql"
-    #     - fromFieldPath: status.instance.arn
-    #       toFieldPath: spec.forProvider.policy
-    #       transforms:
-    #         - type: string
-    #           string:
-    #             fmt: |
-    #               {
-    #                  "Version": "2012-10-17",
-    #                  "Statement": [
-    #                     {
-    #                        "Effect": "Allow",
-    #                        "Action": [
-    #                            "rds-db:connect"
-    #                        ],
-    #                        "Resource": [
-    #                            "%s"
-    #                        ]
-    #                     }
-    #                  ]
-    #               }
+    - name: iampolicy
+      base:
+        apiVersion: iam.aws.upbound.io/v1beta1
+        kind: Policy
+      patches:
+        - fromFieldPath: metadata.name
+          toFieldPath: spec.forProvider.name
+          transforms:
+            - type: string
+              string:
+                fmt: "%s-postgresql"
+        - fromFieldPath: status.instance.arn
+          toFieldPath: spec.forProvider.policy
+          transforms:
+            - type: string
+              string:
+                fmt: |
+                  {
+                     "Version": "2012-10-17",
+                     "Statement": [
+                        {
+                           "Effect": "Allow",
+                           "Action": [
+                               "rds-db:connect"
+                           ],
+                           "Resource": [
+                               "%s"
+                           ]
+                        }
+                     ]
+                  }
