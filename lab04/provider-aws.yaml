@@ -3,5 +3,5 @@ kind: Provider
 metadata:
   name: provider-aws-ec2
 spec:
-  package: xpkg.upbound.io/upbound/provider-aws-ec2:v0.38.0
+  package: xpkg.upbound.io/upbound/provider-aws-ec2:v0.40.0
 
