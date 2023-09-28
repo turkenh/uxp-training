@@ -35,6 +35,15 @@ spec:
                     type: integer
                   passwordSecretName:
                     type: string
+                  region:
+                    type: string
+                    default: us-east-1
+                  subnetIds:
+                    items:
+                      type: string
+                    type: array
+                  vpcId:
+                    type: string
                 required:
                   - storageGB
                   - passwordSecretName

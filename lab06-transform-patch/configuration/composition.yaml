@@ -4,6 +4,7 @@ metadata:
   name: vpcpostgresqlinstances.aws.database.example.org
   labels:
     uxp-guide: getting-started
+    provider: aws
 spec:
   writeConnectionSecretsToNamespace: upbound-system
   compositeTypeRef:

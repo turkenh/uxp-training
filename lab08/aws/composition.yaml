@@ -198,6 +198,17 @@ spec:
           toFieldPath: "spec.forProvider.allocatedStorage"
         - fromFieldPath: "spec.parameters.passwordSecretName"
           toFieldPath: "spec.forProvider.passwordSecretRef.name"
+        - fromFieldPath: "spec.parameters.class"
+          toFieldPath: "spec.forProvider.instanceClass"
+          transforms:
+          - type: map
+            map:
+              small: db.t2.small
+              medium: db.t2.medium
+              large: db.t3.medium
+        - type: ToCompositeFieldPath
+          fromFieldPath: "status.atProvider"
+          toFieldPath: "status.instance"
       connectionDetails:
         - name: username
           fromFieldPath: spec.forProvider.username
@@ -205,3 +216,34 @@ spec:
           fromConnectionSecretKey: attribute.password
         - name: endpoint
           fromFieldPath: status.atProvider.endpoint
+    - name: iampolicy
+      base:
+        apiVersion: iam.aws.upbound.io/v1beta1
+        kind: Policy
+      patches:
+        - fromFieldPath: "metadata.name"
+          toFieldPath: "spec.forProvider.name"
+          transforms:
+            - type: string
+              string:
+                fmt: "%s-postgresql"
+        - fromFieldPath: "status.instance.arn"
+          toFieldPath: "spec.forProvider.policy"
+          transforms:
+            - type: string
+              string:
+                fmt: |
+                  {
+                     "Version": "2012-10-17",
+                     "Statement": [
+                        {
+                           "Effect": "Allow",
+                           "Action": [
+                               "rds-db:connect"
+                           ],
+                           "Resource": [
+                               "%s"
+                           ]
+                        }
+                     ]
+                  }

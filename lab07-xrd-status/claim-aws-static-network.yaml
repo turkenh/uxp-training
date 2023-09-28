@@ -5,12 +5,18 @@ metadata:
   namespace: default
 spec:
   parameters:
-    storageGB: 20
-    passwordSecretName: getting-started-db-pass
     class: small # small, medium, large
+    passwordSecretName: getting-started-db-pass
+    region: eu-central-1
+    storageGB: 20
+    subnetIds:
+      - subnet-0092854877c56689c
+      - subnet-0b540dab50edec3ba
+      - subnet-0e9d97066263a168e
+    vpcId: vpc-0341abc7a4ae64ad9
   compositionSelector:
     matchLabels:
       uxp-guide: getting-started
-      provider: aws
+      provider: aws-static-network
   writeConnectionSecretToRef:
     name: db-conn

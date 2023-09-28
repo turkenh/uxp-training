@@ -1,0 +1,96 @@
+apiVersion: apiextensions.crossplane.io/v1
+kind: Composition
+metadata:
+  name: vpcpostgresqlinstances.staticnetwork.aws.database.example.org
+  labels:
+    uxp-guide: getting-started
+    provider: aws-static-network
+spec:
+  writeConnectionSecretsToNamespace: upbound-system
+  compositeTypeRef:
+    apiVersion: database.example.org/v1alpha1
+    kind: CompositePostgreSQLInstance
+  resources:
+    - name: dbsubnetgroup
+      base:
+        apiVersion: rds.aws.upbound.io/v1beta1
+        kind: SubnetGroup
+        spec:
+          forProvider:
+            description: An excellent formation of subnetworks.
+      patches:
+        - fromFieldPath: spec.parameters.region
+          toFieldPath: spec.forProvider.region
+        - fromFieldPath: spec.parameters.subnetIds
+          toFieldPath: spec.forProvider.subnetIds
+    - name: securitygroup
+      base:
+        apiVersion: ec2.aws.upbound.io/v1beta1
+        kind: SecurityGroup
+        spec:
+          forProvider:
+            name: uxp-getting-started
+            description: Allow access to PostgreSQL
+      patches:
+        - fromFieldPath: spec.parameters.region
+          toFieldPath: spec.forProvider.region
+        - fromFieldPath: spec.parameters.vpcId
+          toFieldPath: spec.forProvider.vpcId
+    - name: securitygrouprule
+      base:
+        apiVersion: ec2.aws.upbound.io/v1beta1
+        kind: SecurityGroupRule
+        spec:
+          forProvider:
+            type: ingress
+            fromPort: 5432
+            toPort: 5432
+            protocol: tcp
+            cidrBlocks:
+              - 0.0.0.0/0
+            securityGroupIdSelector:
+              matchControllerRef: true
+      patches:
+        - fromFieldPath: spec.parameters.region
+          toFieldPath: spec.forProvider.region
+    - name: rdsinstance
+      base:
+        apiVersion: rds.aws.upbound.io/v1beta1
+        kind: Instance
+        spec:
+          forProvider:
+            dbSubnetGroupNameSelector:
+              matchControllerRef: true
+            vpcSecurityGroupIDSelector:
+              matchControllerRef: true
+            instanceClass: db.t2.small
+            username: masteruser
+            engine: postgres
+            engineVersion: "12.15"
+            skipFinalSnapshot: true
+            publiclyAccessible: false
+            passwordSecretRef:
+              key: password
+              namespace: upbound-system
+          writeConnectionSecretToRef:
+            namespace: upbound-system
+      patches:
+        - fromFieldPath: spec.parameters.region
+          toFieldPath: spec.forProvider.region
+        - fromFieldPath: metadata.uid
+          toFieldPath: spec.writeConnectionSecretToRef.name
+          transforms:
+            - type: string
+              string:
+                fmt: "%s-postgresql"
+        - fromFieldPath: spec.parameters.storageGB
+          toFieldPath: spec.forProvider.allocatedStorage
+        - fromFieldPath: spec.parameters.passwordSecretName
+          toFieldPath: spec.forProvider.passwordSecretRef.name
+      connectionDetails:
+        - name: username
+          fromFieldPath: spec.forProvider.username
+        - name: password
+          fromConnectionSecretKey: attribute.password
+        - name: endpoint
+          fromFieldPath: status.atProvider.endpoint
