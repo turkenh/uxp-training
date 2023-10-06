@@ -11,5 +11,6 @@ spec:
   compositionSelector:
     matchLabels:
       uxp-guide: getting-started
+      provider: aws
   writeConnectionSecretToRef:
     name: db-conn
