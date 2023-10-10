@@ -171,6 +171,7 @@ spec:
         kind: Instance
         spec:
           forProvider:
+            applyImmediately: true # apply changes immediately instead of waiting for the standard RDS maintenance window
             region: us-east-1
             dbSubnetGroupNameSelector:
               matchControllerRef: true
