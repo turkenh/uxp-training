@@ -1,0 +1,19 @@
+apiVersion: aws.platformref.upbound.io/v1alpha1
+kind: SQLInstance
+metadata:
+  name: platform-ref-aws-db-mariadb
+  namespace: default
+spec:
+  parameters:
+    engine: mariadb
+    engineVersion: "10.6.10"
+    storageGB: 5
+    autoGeneratePassword: true
+    passwordSecretRef:
+      namespace: default
+      name: mariadbsecret
+      key: password
+    clusterRef:
+      id: platform-ref-aws # make sure it has same id as the Cluster from previous lab
+  writeConnectionSecretToRef:
+    name: platform-ref-aws-db-conn-mariadb
