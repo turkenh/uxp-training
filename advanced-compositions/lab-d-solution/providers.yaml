@@ -1,0 +1,36 @@
+apiVersion: pkg.crossplane.io/v1
+kind: Provider
+metadata:
+  name: provider-aws-iam
+spec:
+  package: xpkg.upbound.io/upbound/provider-aws-iam:v0.42.0
+  controllerConfigRef:
+    name: op-aws-config
+---
+apiVersion: pkg.crossplane.io/v1
+kind: Provider
+metadata:
+  name: provider-aws-ec2
+spec:
+  package: xpkg.upbound.io/upbound/provider-aws-ec2:v0.42.0
+  controllerConfigRef:
+    name: op-aws-config
+---
+apiVersion: pkg.crossplane.io/v1
+kind: Provider
+metadata:
+  name: provider-aws-eks
+spec:
+  package: xpkg.upbound.io/upbound/provider-aws-eks:v0.42.0
+  controllerConfigRef:
+    name: op-aws-config
+---
+apiVersion: pkg.crossplane.io/v1alpha1
+kind: ControllerConfig
+metadata:
+  name: op-aws-config
+  labels:
+    app: provider-aws
+spec:
+  args:
+    - -d
