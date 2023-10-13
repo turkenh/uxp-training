@@ -4,6 +4,8 @@ metadata:
   name: provider-aws-iam
 spec:
   package: xpkg.upbound.io/upbound/provider-aws-iam:v0.42.0
+  controllerConfigRef:
+    name: op-aws-config
 ---
 apiVersion: pkg.crossplane.io/v1
 kind: Provider
