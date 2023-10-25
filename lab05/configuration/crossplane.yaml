@@ -6,7 +6,9 @@ metadata:
     uxp-guide: getting-started
 spec:
   crossplane:
-    version: ">=v1.2.1-0"
+    version: ">=v1.12.1-0"
   dependsOn:
-    - provider: registry.upbound.io/crossplane/provider-aws
-      version: ">=v0.22.0-0"
+    - provider: xpkg.upbound.io/upbound/provider-aws-ec2
+      version: ">=v0.42.0"
+    - provider: xpkg.upbound.io/upbound/provider-aws-rds
+      version: ">=v0.42.0"
