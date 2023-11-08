@@ -223,6 +223,8 @@ spec:
       patches:
         - fromFieldPath: "status.instance.arn"
           toFieldPath: "spec.forProvider.policy"
+          policy:
+            fromFieldPath: Required
           transforms:
             - type: string
               string:
