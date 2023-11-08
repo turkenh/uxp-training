@@ -221,12 +221,6 @@ spec:
         apiVersion: iam.aws.upbound.io/v1beta1
         kind: Policy
       patches:
-        - fromFieldPath: "metadata.name"
-          toFieldPath: "spec.forProvider.name"
-          transforms:
-            - type: string
-              string:
-                fmt: "%s-postgresql"
         - fromFieldPath: "status.instance.arn"
           toFieldPath: "spec.forProvider.policy"
           transforms:
